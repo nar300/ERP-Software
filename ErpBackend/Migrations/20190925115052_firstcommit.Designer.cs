@@ -4,42 +4,22 @@ using ErpBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpBackend.Migrations
 {
     [DbContext(typeof(ErpDbContext))]
-    partial class ErpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190925115052_firstcommit")]
+    partial class firstcommit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("EmployeeId");
-
-                    b.Property<string>("Type")
-                        .IsRequired();
-
-                    b.HasKey("id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Attendance");
-                });
 
             modelBuilder.Entity("ErpBackend.Models.Employee", b =>
                 {
@@ -60,9 +40,6 @@ namespace ErpBackend.Migrations
                         .IsRequired();
 
                     b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("EmployeeType")
                         .IsRequired();
 
                     b.Property<string>("Experience")
@@ -103,14 +80,6 @@ namespace ErpBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employee");
-                });
-
-            modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
-                {
-                    b.HasOne("ErpBackend.Models.Employee", "Employee")
-                        .WithMany("Attendances")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

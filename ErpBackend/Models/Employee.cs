@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -29,6 +30,11 @@ namespace ErpBackend.Models
         [Required(ErrorMessage = "Marital status Required")]
         public string MaritalStatus { get; set; }
 
+
+        [Required(ErrorMessage = "Employee Type Required")]
+        public string EmployeeType { get; set; } = "Permanent";
+
+
         [Required(ErrorMessage = "Date of Join Required")]
         public DateTime DateofJoin { get; set; }
         [Required(ErrorMessage = "Mode of Recruitment Required")]
@@ -42,8 +48,10 @@ namespace ErpBackend.Models
         [Display(Name = "Experience Details")]
         [Required(ErrorMessage = "Experience details Required")]
         public string Experience { get; set; }
-     
 
+        public DateTime CreatedTime { get; set; } = DateTime.Now;
+
+        public ICollection<Attendance> Attendances { get; set; } = new Collection<Attendance>();
     }
    
 

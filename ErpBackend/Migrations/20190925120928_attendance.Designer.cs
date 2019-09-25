@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ErpBackend.Migrations
 {
     [DbContext(typeof(ErpDbContext))]
-    [Migration("20190925100627_initial")]
-    partial class initial
+    [Migration("20190925120928_attendance")]
+    partial class attendance
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,13 +21,38 @@ namespace ErpBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("EmployeeId");
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Attendance");
+                });
+
             modelBuilder.Entity("ErpBackend.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<DateTime>("CreatedTime");
 
                     b.Property<DateTime>("DateofBirth");
 
@@ -39,6 +64,9 @@ namespace ErpBackend.Migrations
                     b.Property<string>("Email")
                         .IsRequired();
 
+                    b.Property<string>("EmployeeType")
+                        .IsRequired();
+
                     b.Property<string>("Experience")
                         .IsRequired();
 
@@ -48,7 +76,8 @@ namespace ErpBackend.Migrations
                     b.Property<string>("Gender")
                         .IsRequired();
 
-                    b.Property<string>("HomeAddress");
+                    b.Property<string>("HomeAddress")
+                        .IsRequired();
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -64,16 +93,26 @@ namespace ErpBackend.Migrations
 
                     b.Property<int>("PhoneNumber");
 
-                    b.Property<string>("PostCode");
+                    b.Property<string>("PostCode")
+                        .IsRequired();
 
                     b.Property<string>("Status")
                         .IsRequired();
 
-                    b.Property<string>("Town");
+                    b.Property<string>("Town")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.ToTable("Employee");
+                });
+
+            modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
+                {
+                    b.HasOne("ErpBackend.Models.Employee", "Employee")
+                        .WithMany("Attendances")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ErpBackend.Migrations
 {
-    public partial class initial : Migration
+    public partial class firstcommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,10 +12,10 @@ namespace ErpBackend.Migrations
                 name: "Employee",
                 columns: table => new
                 {
-                    HomeAddress = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    Town = table.Column<string>(nullable: true),
-                    PostCode = table.Column<string>(nullable: true),
+                    HomeAddress = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Town = table.Column<string>(nullable: false),
+                    PostCode = table.Column<string>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: false),
@@ -30,7 +30,8 @@ namespace ErpBackend.Migrations
                     ModeofRecruitment = table.Column<string>(nullable: false),
                     Status = table.Column<string>(nullable: false),
                     Education = table.Column<string>(nullable: false),
-                    Experience = table.Column<string>(nullable: false)
+                    Experience = table.Column<string>(nullable: false),
+                    CreatedTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
