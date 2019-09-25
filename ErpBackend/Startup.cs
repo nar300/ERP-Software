@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ErpBackend.Data;
+using ErpBackend.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,7 @@ namespace ErpBackend
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<ErpDbContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("defaultconnection")));
+            services.AddScoped<EmployeeRepo, EmployeeRepoImpl>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

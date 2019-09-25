@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ErpBackend.Repository
 {
-    interface EmployeeRepo:BaseRepo<Employee>
+   public interface EmployeeRepo:BaseRepo<Employee>
     {
     }
 }
