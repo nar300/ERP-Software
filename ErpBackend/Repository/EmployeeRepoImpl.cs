@@ -31,7 +31,9 @@ namespace ErpBackend.Repository
 
         public async Task<IEnumerable<Employee>> GetAll()
         {
-           var emplist = await _db.Employees.ToListAsync();
+           var emplist = await _db.Employees.
+                Include(emp=>emp.Attendances ).Include(emp=>emp.Leaves).
+                Include(emp=>emp.Salaries).ToListAsync();
             return emplist;
         }
 

@@ -28,9 +28,14 @@ namespace ErpBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<ErpDbContext>(option=>option.UseSqlServer(Configuration.GetConnectionString("defaultconnection")));
             services.AddScoped<EmployeeRepo, EmployeeRepoImpl>();
+            services.AddScoped<IAttendanceRepo, AttendanceRepoImpl>();
+            services.AddScoped<IDepartmentRepo, DepartmentImpl>();
+            services.AddScoped<ILeaveRepo, LeaveRepoImpl>();
+            services.AddScoped<ISalaryRepo  , SalaryRepoImpl>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +50,9 @@ namespace ErpBackend
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            
+            app.UseCors(Options => Options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
         }
     }

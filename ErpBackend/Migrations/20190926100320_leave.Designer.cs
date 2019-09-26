@@ -4,14 +4,16 @@ using ErpBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ErpBackend.Migrations
 {
     [DbContext(typeof(ErpDbContext))]
-    partial class ErpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190926100320_leave")]
+    partial class leave
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,27 +147,6 @@ namespace ErpBackend.Migrations
                     b.ToTable("Leave");
                 });
 
-            modelBuilder.Entity("ErpBackend.Models.Salary", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("EmployeeId");
-
-                    b.Property<string>("Hour");
-
-                    b.Property<double>("Rate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("Salaries");
-                });
-
             modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
                 {
                     b.HasOne("ErpBackend.Models.Employee", "Employee")
@@ -178,14 +159,6 @@ namespace ErpBackend.Migrations
                 {
                     b.HasOne("ErpBackend.Models.Employee", "Employee")
                         .WithMany("Leaves")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ErpBackend.Models.Salary", b =>
-                {
-                    b.HasOne("ErpBackend.Models.Employee", "Employee")
-                        .WithMany("Salaries")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
