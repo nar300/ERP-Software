@@ -8,26 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ErpBackend.Repository
 {
-    public class EmployeeRepoImpl : EmployeeRepo
+    public class EmployeeRepoImpl : BaseRepoImpl<Employee>,EmployeeRepo
     {
-       private readonly ErpDbContext _db;
-        public EmployeeRepoImpl(ErpDbContext db)
+      
+        public EmployeeRepoImpl(ErpDbContext db):base(db)
         {
-            _db = db;
+            
         }
-        public async Task< Employee> Create(Employee body)
-        {
-            _db.Employees.Add(body);
-            await _db.SaveChangesAsync();
-            return body;
-        }
-
-        public async Task<Employee> Delete(Employee body)
-        {
-            _db.Employees.Remove(body);
-            await _db.SaveChangesAsync();
-            return body;
-        }
+       
 
         public async Task<IEnumerable<Employee>> GetAll()
         {
@@ -43,18 +31,6 @@ namespace ErpBackend.Repository
             return Emp;
         }
 
-        public async Task<bool> IsSaved()
-        {
-           
-            return  await _db.SaveChangesAsync()>0;
-        }
-
-        public async Task<Employee> Update(Employee body, int id)
-        {
-
-            _db.Entry(body).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-            return body;
-        }
+       
     }
 }

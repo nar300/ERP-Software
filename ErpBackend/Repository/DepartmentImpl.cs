@@ -8,27 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ErpBackend.Repository
 {
-    public class DepartmentImpl : IDepartmentRepo
+    public class DepartmentImpl :BaseRepoImpl<Department> ,IDepartmentRepo
     {
-       private readonly ErpDbContext _db;
-        public DepartmentImpl(ErpDbContext db)
+       
+        public DepartmentImpl(ErpDbContext db):base(db)
         {
-            _db = db;
-        }
-        public async Task<Department> Create(Department body)
-        {
-            _db.Departments.Add(body);
-           await _db.SaveChangesAsync();
-            return body;
             
         }
-
-        public async Task<Department> Delete(Department body)
-        {
-            _db.Departments.Remove(body);
-            await _db.SaveChangesAsync();
-            return body;
-        }
+       
 
         public async Task<IEnumerable<Department>> GetAll()
         {
@@ -43,16 +30,6 @@ namespace ErpBackend.Repository
 
         }
 
-        public async Task<bool> IsSaved()
-        {
-            return await _db.SaveChangesAsync() > 0;
-        }
-
-        public async Task<Department> Update(Department body, int id)
-        {
-            _db.Entry(body).State = EntityState.Modified;
-           await _db.SaveChangesAsync();
-            return body;
-        }
+       
     }
 }

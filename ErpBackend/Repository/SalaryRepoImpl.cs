@@ -8,26 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ErpBackend.Repository
 {
-    public class SalaryRepoImpl : ISalaryRepo
+    public class SalaryRepoImpl :BaseRepoImpl<Salary> ,ISalaryRepo
     {
-        private readonly ErpDbContext _db;
-        public SalaryRepoImpl(ErpDbContext _Db)
+        
+        public SalaryRepoImpl(ErpDbContext _Db):base(_Db)
         {
-            _db = _Db;
+            
         }
-        public async Task<Salary> Create(Salary body)
-        {
-            _db.Salaries.Add(body);
-            await _db.SaveChangesAsync();
-            return body;
-        }
-
-        public async Task<Salary> Delete(Salary body)
-        {
-            _db.Salaries.Remove(body);
-            await _db.SaveChangesAsync();
-            return body;
-        }
+      
 
         public async Task<IEnumerable<Salary>> GetAll()
         {
@@ -42,16 +30,6 @@ namespace ErpBackend.Repository
             
         }
 
-        public async Task<bool> IsSaved()
-        {
-          return  await _db.SaveChangesAsync() > 0;
-        }
-
-        public async Task<Salary> Update(Salary body, int id)
-        {
-            _db.Entry(body).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-            return body;
-        }
+       
     }
 }
