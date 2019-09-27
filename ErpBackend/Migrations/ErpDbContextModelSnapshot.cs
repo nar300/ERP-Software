@@ -52,9 +52,40 @@ namespace ErpBackend.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("EmployeeId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
                     b.ToTable("Department");
+                });
+
+            modelBuilder.Entity("ErpBackend.Models.Designation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Division")
+                        .IsRequired();
+
+                    b.Property<int>("EmployeeId");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired();
+
+                    b.Property<int>("ReportTo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
+                    b.ToTable("Designation");
                 });
 
             modelBuilder.Entity("ErpBackend.Models.Employee", b =>
@@ -155,15 +186,19 @@ namespace ErpBackend.Migrations
 
                     b.Property<int>("EmployeeId");
 
-                    b.Property<string>("Hour");
+                    b.Property<string>("PayType")
+                        .IsRequired();
 
                     b.Property<double>("Rate");
+
+                    b.Property<string>("RateType")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Salaries");
+                    b.ToTable("Salary");
                 });
 
             modelBuilder.Entity("ErpBackend.Models.Attendance", b =>
@@ -171,6 +206,22 @@ namespace ErpBackend.Migrations
                     b.HasOne("ErpBackend.Models.Employee", "Employee")
                         .WithMany("Attendances")
                         .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ErpBackend.Models.Department", b =>
+                {
+                    b.HasOne("ErpBackend.Models.Employee", "Employee")
+                        .WithOne("Department")
+                        .HasForeignKey("ErpBackend.Models.Department", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ErpBackend.Models.Designation", b =>
+                {
+                    b.HasOne("ErpBackend.Models.Employee", "Employee")
+                        .WithOne("Designation")
+                        .HasForeignKey("ErpBackend.Models.Designation", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
