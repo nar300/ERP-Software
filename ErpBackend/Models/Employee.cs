@@ -54,6 +54,7 @@ namespace ErpBackend.Models
         public ICollection<Attendance> Attendances { get; set; } = new Collection<Attendance>();
         public ICollection<Leave> Leaves { get; set; } = new Collection<Leave>();
         public ICollection<Salary> Salaries { get; set; } = new Collection<Salary>();
+        public ICollection<PayRoll> PayRolls { get; set; } = new Collection<PayRoll>();
         
         public Department Department { get; set; }
         public Designation  Designation { get; set; }
