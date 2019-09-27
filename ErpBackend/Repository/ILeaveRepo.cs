@@ -8,5 +8,7 @@ namespace ErpBackend.Repository
 {
   public  interface ILeaveRepo:BaseRepo<Leave>
     {
+        Task<IEnumerable<Leave>> GetAll();
+        Task<Leave> GetById(int id);
     }
 }

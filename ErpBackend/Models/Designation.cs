@@ -15,9 +15,12 @@ namespace ErpBackend.Models
         [Required(ErrorMessage ="Job Title Required")]
         [Display(Name ="Job Title")]
         public string JobTitle { get; set; }
+
         public string Description { get; set; }
+
         [Required(ErrorMessage = "Division  Required")]
         public string Division { get; set; }
+
         [Required(ErrorMessage = "Report To  Required")]
         [Display(Name = "Report To")]
         public int ReportTo { get; set; }

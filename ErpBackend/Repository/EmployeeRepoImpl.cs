@@ -33,7 +33,7 @@ namespace ErpBackend.Repository
         {
            var emplist = await _db.Employees.
                 Include(emp=>emp.Attendances ).Include(emp=>emp.Leaves).
-                Include(emp=>emp.Salaries).ToListAsync();
+                Include(emp=>emp.Salaries).Include(emp=>emp.Designation).ToListAsync();
             return emplist;
         }
 

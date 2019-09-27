@@ -8,5 +8,7 @@ namespace ErpBackend.Repository
 {
   public  interface ISalaryRepo:BaseRepo<Salary>
     {
+        Task<IEnumerable<Salary>> GetAll();
+        Task<Salary> GetById(int id);
     }
 }

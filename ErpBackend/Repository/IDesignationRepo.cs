@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ErpBackend.Repository
 {
-  public  interface IAttendanceRepo:BaseRepo<Attendance>
+  public interface IDesignationRepo:BaseRepo<Designation>
     {
-        Task<IEnumerable<Attendance>> GetAll();
-        Task<Attendance> GetById(int id);
+        Task<IEnumerable<Designation>> GetAll();
+        Task<Designation> GetById(int id);
     }
 }

@@ -35,6 +35,8 @@ namespace ErpBackend
             services.AddScoped<IDepartmentRepo, DepartmentImpl>();
             services.AddScoped<ILeaveRepo, LeaveRepoImpl>();
             services.AddScoped<ISalaryRepo  , SalaryRepoImpl>();
+       
+            services.AddScoped<IDesignationRepo  , DesignationRepoImpl>();
             services.AddCors();
         }
 
