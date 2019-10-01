@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ErpBackend.Data;
 using ErpBackend.Models;
 using ErpBackend.Repository;
+using ErpBackend.Utils;
 
 namespace ErpBackend.Controllers
 {
@@ -26,6 +27,8 @@ namespace ErpBackend.Controllers
         [HttpGet]
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
+          //  DataGenerator dg = new DataGenerator(_context);
+          //await  dg.Fakedata();
             return await _context.GetAll();
         }
 

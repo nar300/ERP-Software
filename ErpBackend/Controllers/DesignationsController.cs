@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ErpBackend.Data;
 using ErpBackend.Models;
 using ErpBackend.Repository;
+using ErpBackend.Utils;
 
 namespace ErpBackend.Controllers
 {
@@ -26,6 +27,9 @@ namespace ErpBackend.Controllers
         [HttpGet]
         public async Task< IEnumerable<Designation>> GetDesignations()
         {
+           // DataGenerator dg = new DataGenerator(_context);
+           //await dg.FakeDes();
+                
             return await _context.GetAll();
         }
 
