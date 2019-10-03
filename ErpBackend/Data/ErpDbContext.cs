@@ -20,10 +20,6 @@ namespace ErpBackend.Data
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<Designation> Designations { get; set; }
         public DbSet<PayRoll> PayRolls { get; set; }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Employee>().HasOne<Department>(emp => emp.Department)
-                .WithOne(dpt => dpt.Employee).HasForeignKey<Department>(dd => dd.EmployeeId);
-        }
+       
     }
 }

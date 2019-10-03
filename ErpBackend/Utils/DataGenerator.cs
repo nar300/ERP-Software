@@ -10,8 +10,8 @@ namespace ErpBackend.Utils
 {
     public class DataGenerator
     {
-        private readonly IDesignationRepo _context;
-        public DataGenerator(IDesignationRepo context)
+        private readonly IDepartmentRepo _context;
+        public DataGenerator(IDepartmentRepo context)
         {
             _context = context;
         }
@@ -20,27 +20,27 @@ namespace ErpBackend.Utils
 
         }
 
-        //public async Task FakeDpt()
-        //{
-        //    for (int i = 8; i < 39; i++)
-        //    {
-        //        var testDpt = new Faker<Department>()
-        //            .RuleFor(dpt => dpt.DepartmentName, f => f.Commerce.Department())
-        //            .RuleFor(dpt => dpt.EmployeeId, f => i);
-        //        await _context.Create(testDpt);
-        //    }
-        //}
+        public async Task FakeDpt()
+        {
+            for (int i = 8; i < 39; i++)
+            {
+                var testDpt = new Faker<Department>()
+                    .RuleFor(dpt => dpt.DepartmentName, f => f.Commerce.Department());
+
+                await _context.Create(testDpt);
+            }
+        }
         public async Task FakeDes()
         {
-            for (int i = 8; i <= 39; i++)
-            {
-                var testDes = new Faker<Designation>()
-                    .RuleFor(dpt => dpt.JobTitle, f => f.Name.JobTitle())
-                    .RuleFor(dpt => dpt.Division, f => f.Name.JobArea())
-                    .RuleFor(dpt => dpt.ReportTo, f => f.Random.Number())
-                    .RuleFor(dpt => dpt.EmployeeId, f => i);
-                await _context.Create(testDes);
-            }
+            //for (int i = 8; i <= 39; i++)
+            //{
+            //    var testDes = new Faker<Designation>()
+            //        .RuleFor(dpt => dpt.JobTitle, f => f.Name.JobTitle())
+            //        .RuleFor(dpt => dpt.Division, f => f.Name.JobArea())
+            //        .RuleFor(dpt => dpt.ReportTo, f => f.Random.Number());
+                    
+            //    await _context.Create(testDes);
+            //}
         }
         public async Task Fakedata()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,7 +18,6 @@ namespace ErpBackend.Models
         
         public string Description { get; set; }
 
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public ICollection<Employee> Employees { get; set; } = new Collection<Employee>();
     }
 }
