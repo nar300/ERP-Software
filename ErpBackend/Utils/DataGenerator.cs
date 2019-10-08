@@ -10,8 +10,8 @@ namespace ErpBackend.Utils
 {
     public class DataGenerator
     {
-        private readonly IDepartmentRepo _context;
-        public DataGenerator(IDepartmentRepo context)
+        private readonly EmployeeRepo _context;
+        public DataGenerator(EmployeeRepo context)
         {
             _context = context;
         }
@@ -20,16 +20,16 @@ namespace ErpBackend.Utils
 
         }
 
-        public async Task FakeDpt()
-        {
-            for (int i = 8; i < 39; i++)
-            {
-                var testDpt = new Faker<Department>()
-                    .RuleFor(dpt => dpt.DepartmentName, f => f.Commerce.Department());
+        //public async Task FakeDpt()
+        //{
+        //    for (int i = 8; i < 39; i++)
+        //    {
+        //        var testDpt = new Faker<Department>()
+        //            .RuleFor(dpt => dpt.DepartmentName, f => f.Commerce.Department());
 
-                await _context.Create(testDpt);
-            }
-        }
+        //        await _context.Create(testDpt);
+        //    }
+        //}
         public async Task FakeDes()
         {
             //for (int i = 8; i <= 39; i++)
@@ -45,7 +45,7 @@ namespace ErpBackend.Utils
         public async Task Fakedata()
         {
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 1; i < 31; i++)
             {
                 var testEmployee = new Faker<Employee>()
                .RuleFor(emp => emp.FirstName, f => f.Name.FirstName())
@@ -64,10 +64,13 @@ namespace ErpBackend.Utils
                .RuleFor(emp => emp.EmployeeType, f => "Permanent")
                .RuleFor(emp => emp.DateofJoin, f => f.Date.Past())
                .RuleFor(emp => emp.ModeofRecruitment, f => "Interview")
+               .RuleFor(emp => emp.DesignationId, f =>i)
+               .RuleFor(emp => emp.DepartmentId, f => i)
                .RuleFor(emp => emp.Education, f => "MCA")
+
                .RuleFor(emp => emp.Experience, f => "5 years");
 
-                //await _context.Create(testEmployee);
+                await _context.Create(testEmployee);
 
             }
             //var testDepartment = new Faker<Department>()

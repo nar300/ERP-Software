@@ -27,7 +27,7 @@ namespace ErpBackend.Repository
 
         public async Task<Employee> GetById(int id)
         {
-           var Emp= await _db.Employees.FirstOrDefaultAsync(emp => emp.Id == id);
+           var Emp= await _db.Employees.Include(emp=>emp.Attendances).FirstOrDefaultAsync(emp => emp.Id == id);
             return Emp;
         }
 
